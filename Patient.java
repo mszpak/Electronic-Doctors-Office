@@ -2,23 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Patient {
+public class patient {
 	
 	private String PatientName;
 	private String DateOfBirth;
 	private String PatientID;
-	private List<Medication> Medication;
-	private List<Doctor> Doctor;
-	private List<Appointment> Appointment;
+	private List<medication> medication;
+	private List<doctor> doctor;
+	private List<appointment> appointment;
 	
 	public Patient(String name, String DOB, String ID)
 	{
 		PatientName = name;
 		DateOfBirth = DOB;
 		PatientID = ID;
-		Medication = new ArrayList<Medication>();
-		Doctor = new ArrayList<Doctor>();
-		Appointment = new ArrayList<Appointment>();
+		medication = new ArrayList<medication>();
+		doctor = new ArrayList<doctor>();
+		appointment = new ArrayList<appointment>();
 	}
 	
 	/**
