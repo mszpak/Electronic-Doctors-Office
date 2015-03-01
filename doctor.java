@@ -13,17 +13,17 @@ public class doctor{
         
     }
     
-    public getName(){
+    public String getName(){
         
         return doctorName;
     }
     
-    public getDOB(){
+    public String getDOB(){
      
         return dateOfBirth;
     }
     
-    public getID(){
+    public String getID(){
         
         return doctorID;   
     }

@@ -7,18 +7,18 @@ public class patient {
 	private String PatientName;
 	private String DateOfBirth;
 	private String PatientID;
-	private List<medication> medication;
-	private List<doctor> doctor;
-	private List<appointment> appointment;
+	//private List<medication> medication;
+	//private List<doctor> doctor;
+	//private List<appointment> appointment;
 	
-	public Patient(String name, String DOB, String ID)
+	public patient( String ID, String DOB, String name)
 	{
 		PatientName = name;
 		DateOfBirth = DOB;
 		PatientID = ID;
-		medication = new ArrayList<medication>();
-		doctor = new ArrayList<doctor>();
-		appointment = new ArrayList<appointment>();
+		//medication = new ArrayList<medication>();
+		//doctor = new ArrayList<doctor>();
+		//appointment = new ArrayList<appointment>();
 	}
 	
 	/**
