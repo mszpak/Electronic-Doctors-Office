@@ -3,11 +3,13 @@ public class appointment{
     
     private String time;
     private String date;
+    private String ID;
     
-    public appointment(String TOD, String date){
+    public appointment(String ID, String date, String TOD){
         
         time = TOD;
-        date = this.date;
+        this.date = date;
+        this.ID = ID;
     }
     
     public String getAppointment(){
@@ -15,5 +17,18 @@ public class appointment{
         String thisAppointment = (date + "-" + time);
         return thisAppointment;
         
+    }
+    
+    public String getTime()
+    {
+        return time;
+    }
+    public String getDate()
+    {
+        return date;
+    }
+    public String getID()
+    {
+        return ID;
     }
 }

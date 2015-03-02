@@ -4,13 +4,17 @@ public class doctor{
     private String doctorName;
     private String dateOfBirth;
     private String doctorID;
+    private String special;
+    private String location;
     
     
-    public doctor(String name, String DOB, String ID)
+    public doctor(String ID, String DOB, String name, String special, String location)
     {
         doctorName = name;
         dateOfBirth = DOB;
         doctorID = ID;
+        this.special = special;
+        this.location = location;
         
     }
     
@@ -20,13 +24,23 @@ public class doctor{
     }
     
     public String getDOB(){
-     
+        
         return dateOfBirth;
     }
     
     public String getID(){
         
-        return doctorID;   
+        return doctorID;
+    }
+    
+    public String getSpecial(){
+        
+        return special;
+    }
+    
+    public String getLocation(){
+        
+        return location;
     }
     
 }
