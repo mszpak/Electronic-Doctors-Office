@@ -53,7 +53,7 @@ public class DatabaseSupport {
 		return returnValue;
 	}
 	
-	public int getAuthority(String ID, String PW){
+	public int getAuthority(String ID){
 		//we are using the try/catch block to determine if there was an error. //the boolean returnValue starts out as true and will only be set to //false if there is an SQL error (exception).
 		int authority=0;
 		try {
@@ -74,10 +74,40 @@ public class DatabaseSupport {
 							"\n\t\t"+
 							"SQLState: "+sqle.getSQLState()+"\n";
 					System.out.println(logMessage);
-					return -1;
+					
 				}
-				sqle = sqle.getNextException(); }
+				sqle = sqle.getNextException(); 
+				return -1;
+				}
 		return authority;
+	}
+	
+	public boolean userExists(String ID){
+		//we are using the try/catch block to determine if there was an error. //the boolean returnValue starts out as true and will only be set to //false if there is an SQL error (exception).
+		boolean ret = false;
+		try {
+			connection=this.getConnection();
+		
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from users where ID='"+ID+"'");
+			if(rs.next())
+			{
+				return true;
+			}
+
+			stmt.close();
+			connection.close(); } catch (SQLException sqle){
+				sqle.printStackTrace(); while (sqle != null) {
+					String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+							"Error code: "+sqle.getErrorCode() +
+							"\n\t\t"+
+							"SQLState: "+sqle.getSQLState()+"\n";
+					System.out.println(logMessage);
+					
+				}
+				sqle = sqle.getNextException(); 
+				}
+		return ret;
 	}
 	
 	public boolean login(String ID, String PW){

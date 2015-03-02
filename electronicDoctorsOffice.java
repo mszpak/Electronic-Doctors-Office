@@ -19,12 +19,20 @@ public class electronicDoctorsOffice {
     	return this.getDatabaseSupportInstance().registerUser(ID, PW, position);
     }
     
+    public boolean userExists(String ID)
+    {
+    	return this.getDatabaseSupportInstance().userExists(ID);
+    }
+    
     public boolean login(String ID, String PW)
     {
     	return this.getDatabaseSupportInstance().login(ID, PW);
     }
     
-    
+    public int getAuthority(String ID)
+    {
+    	return this.getDatabaseSupportInstance().getAuthority(ID);
+    }
     private DatabaseSupport getDatabaseSupportInstance()
     {
     	if(ds==null)
