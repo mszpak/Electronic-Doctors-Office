@@ -1,4 +1,6 @@
+
 //STEP 1. Import required packages
+package proj1;
 import java.sql.*;
 
 public class test {

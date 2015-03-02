@@ -1,3 +1,4 @@
+package proj1;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,33 @@ public class DatabaseSupport {
 				}
 				sqle = sqle.getNextException(); }
 		return returnValue;
+	}
+	
+	public int getAuthority(String ID, String PW){
+		//we are using the try/catch block to determine if there was an error. //the boolean returnValue starts out as true and will only be set to //false if there is an SQL error (exception).
+		int authority=0;
+		try {
+			connection=this.getConnection();
+		
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from users where ID='"+ID+"'");
+			if(rs.next())
+			{
+				authority = rs.getInt(3);
+			}
+
+			stmt.close();
+			connection.close(); } catch (SQLException sqle){
+				sqle.printStackTrace(); while (sqle != null) {
+					String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+							"Error code: "+sqle.getErrorCode() +
+							"\n\t\t"+
+							"SQLState: "+sqle.getSQLState()+"\n";
+					System.out.println(logMessage);
+					return -1;
+				}
+				sqle = sqle.getNextException(); }
+		return authority;
 	}
 	
 	public boolean login(String ID, String PW){
