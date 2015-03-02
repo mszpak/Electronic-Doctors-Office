@@ -78,7 +78,26 @@ public class RemovePatient extends JFrame implements ActionListener
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
 					if(d.userExists(patientID))
 					{
-						//delete patient
+						if(d.deletePatient(patientID))
+						{
+							JFrame f1 = new JFrame("Delete Successful");
+							f1.setSize(200,75);
+							f1.setVisible(true);
+							JLabel lbl = new JLabel("Patient deleted from database");
+							JPanel pan = new JPanel();
+							f1.add(pan);
+							pan.add(lbl);
+						}
+						else
+						{
+							JFrame f1 = new JFrame("Delete Unsuccessful");
+							f1.setSize(200,75);
+							f1.setVisible(true);
+							JLabel lbl = new JLabel("Patient was not deleted from database");
+							JPanel pan = new JPanel();
+							f1.add(pan);
+							pan.add(lbl);
+						}
 					}
 					else
 					{

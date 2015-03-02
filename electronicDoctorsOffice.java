@@ -66,5 +66,13 @@ public class electronicDoctorsOffice {
         }
         return ds;
     }
+
+	public int getAuthority(String id) {
+		 return this.getDatabaseSupportInstance().getAuthority(id);
+	}
+
+	public boolean userExists(String patientID) {
+		return this.getDatabaseSupportInstance().userExists(patientID);
+	}
     
 }

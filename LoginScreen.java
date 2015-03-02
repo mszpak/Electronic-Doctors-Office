@@ -1,5 +1,9 @@
 package proj1;
 import javax.swing.*;
+
+import Graphics.AddDoctor;
+import Graphics.RemovePatient;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -106,7 +110,7 @@ public class LoginScreen extends JFrame implements ActionListener
 							}
 							else if(s.next().equals("2"))
 							{
-								
+								RemovePatient r = new RemovePatient("Remove a patient");
 							}
 							else if(s.next().equals("3"))
 							{
@@ -114,13 +118,25 @@ public class LoginScreen extends JFrame implements ActionListener
 							}
 							else if(s.next().equals("4"))
 							{
-								
+								AddDoctor a = new AddDoctor("Add a Doctor");
 							}
 							else if(s.next().equals("5"))
 							{
 								
 							}
 						}
+						}
+						else
+						{
+							displayPatientMenu();
+							Scanner s = new Scanner(System.in);
+							while(s.hasNext())
+							{
+								if(s.next().equals("1"))
+								{
+									d.viewBill(id);
+								}
+							}
 						}
 					}
 				}
