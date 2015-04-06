@@ -107,7 +107,7 @@ public class patient {
     
     public String printInfo()
     {
-    	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth;
+    	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth+", Doctor: "+doctorID;
     }
     
     public String getDoctorID()
