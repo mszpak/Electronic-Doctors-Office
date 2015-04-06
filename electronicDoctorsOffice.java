@@ -81,17 +81,19 @@ public class electronicDoctorsOffice {
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
     	List<appointment> a = p.getAppointment();
+    	int exists = 0;
     	for(int i=0; i<a.size(); i++)
     	{
     		if(a.get(i).getID().equals(aID))
     		{
     			a.get(i).setDate(Date);
     			a.get(i).setTime(Time);
+    			exists = 1;
     		}
-    		else
-    		{
-    			a.add(new appointment(aID, Date, Time));
-    		}
+    	}
+    	if(exists == 0)
+    	{
+    		a.add(new appointment(aID, Date, Time));
     	}
     	p.replaceAppointmentList(a);
     	this.getDatabaseSupportInstance().putPatient(p);
