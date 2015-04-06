@@ -31,4 +31,14 @@ public class appointment{
     {
         return ID;
     }
+    public boolean setTime(String t)
+    {
+    	time = t;
+    	return true;
+    }
+    public boolean setDate(String d)
+    {
+    	date = d;
+    	return true;
+    }
 }

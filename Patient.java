@@ -11,7 +11,7 @@ public class patient {
     private String PatientID;
     private String Password;
     private List<medication> medication;
-    //private List<doctor> doctor;
+    private List<doctor> doctor;
     private List<appointment> appointment;
     private bill bill;
     
@@ -70,6 +70,12 @@ public class patient {
         return appointment;
     }
     
+    public boolean replaceAppointmentList(List<appointment> a)
+    {
+    	appointment = a;
+    	return true;
+    }
+    
     
     public List<medication> getMedication()
     {
@@ -87,9 +93,20 @@ public class patient {
         return bill;
     }
     
+    public boolean editBill(bill b)
+    {
+    	bill = b;
+    	return true;
+    }
+    
     public String viewBill()
     {
         return bill.viewBill();
+    }
+    
+    public String printInfo()
+    {
+    	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth;
     }
 	
 	

@@ -1,4 +1,8 @@
 package proj1;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class electronicDoctorsOffice {
     
     private DatabaseSupport ds = null;
@@ -57,6 +61,43 @@ public class electronicDoctorsOffice {
         patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
         return p.viewBill();
     }
+    
+    public String printPatientInfo(String ID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	return p.printInfo();
+    }
+    
+    public boolean editPatientBilling(String ID, String amount)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	bill b = new bill(p.getBill().getID(), amount);
+    	p.editBill(b);
+    	this.getDatabaseSupportInstance().putPatient(p);
+        return true;
+    }
+    
+    public boolean rescheduleAppointment(String ID, String aID, String Date, String Time)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	List<appointment> a = p.getAppointment();
+    	for(int i=0; i<a.size(); i++)
+    	{
+    		if(a.get(i).getID().equals(aID))
+    		{
+    			a.get(i).setDate(Date);
+    			a.get(i).setTime(Time);
+    		}
+    		else
+    		{
+    			a.add(new appointment(aID, Date, Time));
+    		}
+    	}
+    	p.replaceAppointmentList(a);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+    
     
     private DatabaseSupport getDatabaseSupportInstance()
     {
