@@ -15,8 +15,13 @@ public class DatabaseSupport {
             String qs = "INSERT INTO patient VALUES ('"+p.getID()+"',"+"'"+p.getDOB() +"'"+","+"'"+p.getName()+"'"+",'"+p.getPW()+"'"+",'"+p.getDoctorID()+"'"+")";
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(qs);
-            
             stmt.close();
+            
+            qs = "INSERT INTO bill VALUES ('"+p.getID()+"',"+"'0')";
+            Statement stmt2 = connection.createStatement();
+            stmt2.executeUpdate(qs);
+            stmt2.close();
+            
             connection.close(); } catch (SQLException sqle){
                 returnValue=false; sqle.printStackTrace(); while (sqle != null) {
                     String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
@@ -136,7 +141,7 @@ public class DatabaseSupport {
                     
                     while(rsMed.next())
                     {
-                        m.add(new medication(rsMed.getString(1),rsMed.getString(1),rsMed.getString(1)));
+                        m.add(new medication(rsMed.getString(1),rsMed.getString(2),rsMed.getString(3)));
                     }
                     
                     
@@ -180,14 +185,30 @@ public class DatabaseSupport {
             Statement stmtMed = connection.createStatement();
             Statement stmtBill = connection.createStatement();
             
-            String qs = "UPDATE patient SET ID='"+p.getID()+"',"+"DOB='"+p.getDOB() +"'"+","+"name='"+p.getName()+"'"+",password='"+p.getPW()+"'"+",DoctorId='"+p.getDoctorID()+"'";
+            String qs = "UPDATE patient SET "+"DOB='"+p.getDOB() +"'"+","+"name='"+p.getName()+"'"+",password='"+p.getPW()+"'"+",DoctorId='"+p.getDoctorID()+"'"+" WHERE ID='"+p.getID()+"'";
             stmt.executeUpdate(qs);
+            Statement stmtAppreset = connection.createStatement();
+            
+            
             if(p.getAppointment()!=null)
             {
+            	stmtAppreset.executeUpdate("delete from appointment where ID='"+p.getID()+"'");
                 for(int i=0; i<p.getAppointment().size(); i++)
                 {
-                    qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+")";
-                    stmtAppoint.executeUpdate(qs);
+                	boolean exists = false;
+                	for(int j=i+1; j<p.getAppointment().size(); j++)
+                	{
+                		if(p.getAppointment().get(i).getDate().equals(p.getAppointment().get(j).getDate()) && p.getAppointment().get(i).getTime().equals(p.getAppointment().get(j).getTime()))
+                		{
+                			exists = true;
+                		}
+                	}
+                	if(!exists)
+                	{
+                		qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+","+"'"+p.getAppointment().get(i).getNotes()+"'"+")";
+                        stmtAppoint.executeUpdate(qs);
+                	}
+                	
                     
                 }
             }
@@ -196,7 +217,7 @@ public class DatabaseSupport {
             {
                 for(int i=0; i<p.getMedication().size(); i++)
                 {
-                    qs = "insert into medication values ('"+p.getID()+"',"+"'"+p.getMedication().get(i).getName() +"')";
+                    qs = "insert into medication values ('"+p.getID()+"',"+"'"+p.getMedication().get(i).getName() +"','"+p.getMedication().get(i).getType()+"')";
                     stmtMed.executeUpdate(qs);
                     
                 }
@@ -205,7 +226,7 @@ public class DatabaseSupport {
             qs = "insert into bill values ('"+p.getBill().getID()+"',"+"'"+p.getBill().viewBill() +"') ON DUPLICATE KEY UPDATE amount="+p.getBill().viewBill();
             stmtBill.executeUpdate(qs);
             
-            
+            stmtAppreset.close();
             stmt.close();
             stmtAppoint.close();
             stmtMed.close();

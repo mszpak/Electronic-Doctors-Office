@@ -114,19 +114,19 @@ public class electronicDoctorsOffice {
     }
     
 
-    public boolean viewAppointmentNotes(String patientID)
+    public String viewAppointmentNotes(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.viewApptNotes();
-    	return true;
+    	
+    	return p.viewApptNotes();
     }
     
  
-    public boolean viewAppointmentHistory(String patientID)
+    public String viewAppointmentHistory(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.viewApptHistory();
-    	return true;
+    	
+    	return p.viewApptHistory();
     }
     
   
