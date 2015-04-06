@@ -22,7 +22,7 @@ public class patient {
         PatientID = ID;
         Password = "password";
         this.medication = new ArrayList<medication>();
-        //doctor = new ArrayList<doctor>();
+        this.doctor = new ArrayList<doctor>();
         this.appointment = appointment;
         this.bill = bill;
     }
@@ -109,5 +109,40 @@ public class patient {
     	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth;
     }
 	
+    //new
+    public boolean addDoctorToPatient(doctor d)
+    {
+    	doctor.add(d);
+		return true;
+    	
+    }
+
+    //new
+	public String viewApptNotes()
+	{
+		List<appointment> a = getAppointment();
+		String notes = "";
+		for(int i = 0; i < a.size(); i++){
+			String temp = a.get(i).getNotes();
+			notes = notes + temp + '\n';
+		}
+		return notes;
+		
+	}
+	
+	//new
+	public String viewApptHistory()
+	{
+		List<appointment> a = getAppointment();
+		String appointments = "";
+		for(int i = 0; i < a.size(); i++){
+			String ID = a.get(i).getID();
+			String Date = a.get(i).getDate();
+			String time = a.get(i).getTime();
+			String temp = ID + " " + Date + " " + time + '\n';
+			appointments = appointments + temp;
+		}
+		return appointments;
+	}
 	
 }

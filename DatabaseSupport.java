@@ -74,6 +74,71 @@ public class DatabaseSupport {
         return returnValue;
     }
     
+    public doctor getDoctorInfo(String ID)
+    {
+        doctor d=null;
+        try {
+            connection=this.getConnection();
+            
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from doctor where ID='"+ID+"'");
+            
+            Statement stmtPatient = connection.createStatement();
+            
+            
+            
+            if(rs.next())
+            {
+                ResultSet rsPatient = stmtPatient.executeQuery("select * from patient where DoctorId = '"+ID+"' order by ID");
+                
+                List<patient> p = new ArrayList<patient>();
+                
+            
+                
+                
+                if(ID.equals(rs.getString(1)))
+                {
+                	String patients = rs.getString(1).listPatients();
+                    while(rsPatient.next())
+                    {
+                    	patient p = this.getPatientInfo(ID);
+                        p.add(new patient(rsPatient.getString(1),rsPatient.getString(2),rsPatient.getString(3),rsPatient.getString(4),rsPatient.getString(5),rsPatient.getString(6),rsPatient.getString(7));
+                    }
+                    
+                    while(rsMed.next())
+                    {
+                        m.add(new medication(rsMed.getString(1),rsMed.getString(1)));
+                    }
+                    
+                    
+                    p = new patient(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),a, m, b);
+                    
+                }
+                else
+                {
+                    System.out.println("Wrong ID");
+                    p = null;
+                }
+            }
+            
+            stmt.close();
+            
+            connection.close(); } catch (SQLException sqle){
+                sqle.printStackTrace(); while (sqle != null) {
+                    String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+                    "Error code: "+sqle.getErrorCode() +
+                    "\n\t\t"+
+                    "SQLState: "+sqle.getSQLState()+"\n";
+                    System.out.println(logMessage);
+                    sqle = sqle.getNextException();
+                }
+                
+                
+            }
+        
+        return d;
+    }
+    
     public patient getPatientInfo(String ID)
     {
         patient p=null;
@@ -108,7 +173,7 @@ public class DatabaseSupport {
                 {
                     while(rsAppoint.next())
                     {
-                        a.add(new appointment(rsAppoint.getString(1),rsAppoint.getString(2),rsAppoint.getString(3)));
+                        a.add(new appointment(rsAppoint.getString(1),rsAppoint.getString(2),rsAppoint.getString(3),rsAppoint.getString(4)));
                     }
                     
                     while(rsMed.next())

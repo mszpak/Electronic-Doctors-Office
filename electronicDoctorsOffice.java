@@ -26,7 +26,7 @@ public class electronicDoctorsOffice {
     
     public boolean addDoctor(String ID, String DOB, String Name, String special, String location)
     {
-        doctor d = new doctor(ID,DOB,Name,special,location);
+        doctor d = new doctor(ID,DOB,Name,special,location, null);
         return this.getDatabaseSupportInstance().writeDoctor(d);
     }
     
@@ -43,7 +43,7 @@ public class electronicDoctorsOffice {
     public boolean scheduleAppointment(String ID, String time, String date)
     {
         patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
-        p.addAppointment(new appointment(ID, time, date));
+        p.addAppointment(new appointment(ID, time, date, ""));
         this.getDatabaseSupportInstance().putPatient(p);
         return true;
     }
@@ -81,23 +81,67 @@ public class electronicDoctorsOffice {
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
     	List<appointment> a = p.getAppointment();
+    	int exists = 0;
     	for(int i=0; i<a.size(); i++)
     	{
     		if(a.get(i).getID().equals(aID))
     		{
     			a.get(i).setDate(Date);
     			a.get(i).setTime(Time);
+    			exists = 1;
     		}
-    		else
-    		{
-    			a.add(new appointment(aID, Date, Time));
-    		}
+    	
+    	}
+    	if(exists == 0)
+    	{
+    		a.add(new appointment(aID, Date, Time, ""));
     	}
     	p.replaceAppointmentList(a);
     	this.getDatabaseSupportInstance().putPatient(p);
     	return true;
     }
     
+    //new
+    public boolean addDoctorToPatient(String doctorID, String patientID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	doctor d = this.getDatabaseSupportInstance().getDoctorInfo(doctorID);
+    	
+    	p.addDoctorToPatient(d);
+		return true;
+    	
+    }
+    
+    //new
+    //not done
+    public boolean viewAppointmentNotes(String patientID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	p.viewApptNotes();
+    	return true;
+    }
+    
+    //new
+    public boolean viewAppointmentHistory(String patientID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	p.viewApptHistory();
+    	return true;
+    }
+    
+    //new
+    public String calculateBill(String patientID)
+    {
+    	int billTotal = 0;
+    	String calculated = "You owe: ";
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	List<appointment> a = p.getAppointment();
+    	for(int i = 0; i < a.size(); i++)
+    	{
+    		billTotal = billTotal + a.get(i).getPrice();
+    	}
+    	return calculated + "$" + billTotal;
+    }
     
     private DatabaseSupport getDatabaseSupportInstance()
     {

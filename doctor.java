@@ -1,4 +1,8 @@
 package proj1;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class doctor{
     
     private String doctorName;
@@ -6,16 +10,17 @@ public class doctor{
     private String doctorID;
     private String special;
     private String location;
+    private List<patient> patients;
     
     
-    public doctor(String ID, String DOB, String name, String special, String location)
+    public doctor(String ID, String DOB, String name, String special, String location, List<patient> patients)
     {
         doctorName = name;
         dateOfBirth = DOB;
         doctorID = ID;
         this.special = special;
         this.location = location;
-        
+        this.patients = patients;
     }
     
     public String getName(){
@@ -41,6 +46,23 @@ public class doctor{
     public String getLocation(){
         
         return location;
+    }
+    
+    public List<patient> getPatients()
+    {
+    	return patients;
+    }
+    
+    public String listPatients()
+    {
+    	String patients = "";
+    	List<patient> p = getPatients();
+    	for(int i = 0; i < p.size(); i++)
+    	{
+    		String temp = p.get(i).getID();
+    		patients = patients + temp + '\n';
+    	}
+    	return patients;
     }
     
 }
