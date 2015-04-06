@@ -90,11 +90,13 @@ public class electronicDoctorsOffice {
     			a.get(i).setTime(Time);
     			exists = 1;
     		}
+
     	
     	}
     	if(exists == 0)
     	{
     		a.add(new appointment(aID, Date, Time, ""));
+
     	}
     	p.replaceAppointmentList(a);
     	this.getDatabaseSupportInstance().putPatient(p);
