@@ -1,6 +1,5 @@
 package proj1;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class electronicDoctorsOffice {
@@ -90,8 +89,6 @@ public class electronicDoctorsOffice {
     			a.get(i).setTime(Time);
     			exists = 1;
     		}
-
-    	
     	}
     	if(exists == 0)
     	{
@@ -114,19 +111,17 @@ public class electronicDoctorsOffice {
     }
     
 
-    public boolean viewAppointmentNotes(String patientID)
+    public String viewAppointmentNotes(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.viewApptNotes();
-    	return true;
+    	return p.viewApptNotes();
     }
     
  
-    public boolean viewAppointmentHistory(String patientID)
+    public String viewAppointmentHistory(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.viewApptHistory();
-    	return true;
+    	return p.viewApptHistory();
     }
     
   
@@ -143,21 +138,25 @@ public class electronicDoctorsOffice {
     	return calculated + "$" + billTotal;
     }
     
-    //do this
-    public boolean editPatientMedicalAttributes(String patientID, String medicalAttributes)
+    public boolean editPatientMedicalAttributes(String patientID, medication med)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	
-    	//p.editBill(b);
+    	p.addMedication(med);
     	this.getDatabaseSupportInstance().putPatient(p);
-        return true;
-    	
+        return true;	
     }
     
-    //do this
-    public boolean editPatientNotes(String patientID, String notes)
+    public boolean editAppointmentNotes(String patientID, int appointmentNum, String notes)
     {
-    	
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	List<appointment> a = p.getAppointment();
+    	for(int i = 0; i < a.size(); i++)
+    	{
+    		if(a.get(i).getApptNumber() == appointmentNum)
+    		{
+    			a.get(i).setNotes(notes);
+    		}
+    	}
     	return true;
     }
     

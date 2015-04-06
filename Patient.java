@@ -14,6 +14,7 @@ public class patient {
     private String doctorID;
     private List<appointment> appointment;
     private bill bill;
+    static int appointmentNumber = 0;
     
     public patient( String ID, String DOB, String name, String Password, List<appointment> appointment, List<medication> medication, bill bill)
     {

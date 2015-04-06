@@ -186,6 +186,7 @@ public class DatabaseSupport {
             {
                 for(int i=0; i<p.getAppointment().size(); i++)
                 {
+          
                     qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+")";
                     stmtAppoint.executeUpdate(qs);
                     

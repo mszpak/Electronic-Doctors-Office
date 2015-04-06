@@ -6,6 +6,8 @@ public class appointment{
     private String ID;
     private String notes;
     private int price;
+    private int apptNumber;
+
     
     public appointment(String ID, String date, String TOD, String notes){
         
@@ -14,6 +16,8 @@ public class appointment{
         this.ID = ID;
         this.notes = notes;
         this.price = 100;
+        this.apptNumber = patient.appointmentNumber;
+        patient.appointmentNumber++;
     }
     
     public String getAppointment(){
@@ -52,9 +56,20 @@ public class appointment{
     	return notes;
     }
     
+    public boolean setNotes(String n)
+    {
+    	notes = n;
+    	return true;
+    }
+    
     //new
     public int getPrice()
     {
     	return price;
+    }
+    
+    public int getApptNumber()
+    {
+    	return apptNumber;
     }
 }
