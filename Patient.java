@@ -11,7 +11,7 @@ public class patient {
     private String PatientID;
     private String Password;
     private List<medication> medication;
-    private List<doctor> doctor;
+    private String doctorID;
     private List<appointment> appointment;
     private bill bill;
     
@@ -22,7 +22,7 @@ public class patient {
         PatientID = ID;
         Password = "password";
         this.medication = new ArrayList<medication>();
-        this.doctor = new ArrayList<doctor>();
+        this.doctorID = "";
         this.appointment = appointment;
         this.bill = bill;
     }
@@ -108,11 +108,15 @@ public class patient {
     {
     	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth;
     }
-	
-    //new
-    public boolean addDoctorToPatient(doctor d)
+    
+    public String getDoctorID()
     {
-    	doctor.add(d);
+    	return doctorID;
+    }
+	
+    public boolean addDoctorToPatient(String doctorID)
+    {
+    	this.doctorID = doctorID;
 		return true;
     	
     }

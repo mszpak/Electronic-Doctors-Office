@@ -107,9 +107,8 @@ public class electronicDoctorsOffice {
     public boolean addDoctorToPatient(String doctorID, String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	doctor d = this.getDatabaseSupportInstance().getDoctorInfo(doctorID);
-    	
-    	p.addDoctorToPatient(d);
+    	p.addDoctorToPatient(doctorID);
+    	this.getDatabaseSupportInstance().putPatient(p);
 		return true;
     	
     }
@@ -148,11 +147,10 @@ public class electronicDoctorsOffice {
     public boolean editPatientMedicalAttributes(String patientID, String medicalAttributes)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.editBill(b);
+    	
+    	//p.editBill(b);
     	this.getDatabaseSupportInstance().putPatient(p);
         return true;
-    	
-		return true;
     	
     }
     
