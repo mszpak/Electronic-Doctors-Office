@@ -48,10 +48,10 @@ public class electronicDoctorsOffice {
         return true;
     }
     
-    public boolean assignMedication(String ID, String name)
+    public boolean assignMedication(String ID, String name, String type)
     {
         patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
-        p.addMedication(new medication(ID, name));
+        p.addMedication(new medication(ID, name, type));
         this.getDatabaseSupportInstance().putPatient(p);
         return true;
     }
@@ -103,7 +103,7 @@ public class electronicDoctorsOffice {
     	return true;
     }
     
-    //new
+   
     public boolean addDoctorToPatient(String doctorID, String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
@@ -114,8 +114,7 @@ public class electronicDoctorsOffice {
     	
     }
     
-    //new
-    //not done
+
     public boolean viewAppointmentNotes(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
@@ -123,7 +122,7 @@ public class electronicDoctorsOffice {
     	return true;
     }
     
-    //new
+ 
     public boolean viewAppointmentHistory(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
@@ -131,7 +130,7 @@ public class electronicDoctorsOffice {
     	return true;
     }
     
-    //new
+  
     public String calculateBill(String patientID)
     {
     	int billTotal = 0;
@@ -143,6 +142,31 @@ public class electronicDoctorsOffice {
     		billTotal = billTotal + a.get(i).getPrice();
     	}
     	return calculated + "$" + billTotal;
+    }
+    
+    //do this
+    public boolean editPatientMedicalAttributes(String patientID, String medicalAttributes)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	p.editBill(b);
+    	this.getDatabaseSupportInstance().putPatient(p);
+        return true;
+    	
+		return true;
+    	
+    }
+    
+    //do this
+    public boolean editPatientNotes(String patientID, String notes)
+    {
+    	
+    	return true;
+    }
+    
+    public boolean addMedication(String ID, String Name, String type)
+    {
+    	medication m = new medication(ID,Name,type);
+        return this.getDatabaseSupportInstance().writeMedication(m);
     }
     
     private DatabaseSupport getDatabaseSupportInstance()

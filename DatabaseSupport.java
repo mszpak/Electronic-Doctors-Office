@@ -74,6 +74,28 @@ public class DatabaseSupport {
         return returnValue;
     }
     
+    public boolean writeMedication(medication m){
+        boolean returnValue=true;
+        try {
+            connection=this.getConnection();
+            
+            String qs = "INSERT INTO medication VALUES ('"+m.getID()+"',"+"'"+m.getName() +"'"+","+"'"+m.getType()+"')";
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(qs);
+            
+            stmt.close();
+            connection.close(); } catch (SQLException sqle){
+                returnValue=false; sqle.printStackTrace(); while (sqle != null) {
+                    String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+                    "Error code: "+sqle.getErrorCode() +
+                    "\n\t\t"+
+                    "SQLState: "+sqle.getSQLState()+"\n";
+                    System.out.println(logMessage);
+                }
+                sqle = sqle.getNextException(); }
+        return returnValue;
+    }
+    
     public doctor getDoctorInfo(String ID)
     {
         doctor d=null;
