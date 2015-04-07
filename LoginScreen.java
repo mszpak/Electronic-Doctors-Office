@@ -2,6 +2,8 @@ package proj1;
 import javax.swing.*;
 
 import Graphics.AddDoctor;
+import Graphics.AddPatient;
+import Graphics.DoctorMenu;
 import Graphics.RemovePatient;
 
 import java.awt.*;
@@ -93,42 +95,26 @@ public class LoginScreen extends JFrame implements ActionListener
 				{
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
 					String id = enter.getText();
-					if(d.login(id, pw))
+					if(!d.login(id, pw))
 					{
-						if(d.getAuthority(id) == 1){
-						displayReceptionistMenu();
-						Scanner s = new Scanner(System.in);
-						while(s.hasNext())
+						JFrame f1 = new JFrame("Invalid ID");
+						f1.setSize(200,75);
+						f1.setVisible(true);
+						JLabel lbl = new JLabel("Login with a valid ID");
+						JPanel pan = new JPanel();
+						f1.add(pan);
+						pan.add(lbl);
+					}
+						
+						if(d.getAuthority(id) == 1)
 						{
-							if(s.next().equals("1"))
-							{
-								s.nextLine();
-								JFrame f2 = new JFrame("Add a Patient");
-								f2.setSize(300,300);
-								f2.setVisible(true);
-								
-							}
-							else if(s.next().equals("2"))
-							{
-								RemovePatient r = new RemovePatient("Remove a patient");
-							}
-							else if(s.next().equals("3"))
-							{
-								
-							}
-							else if(s.next().equals("4"))
-							{
-								AddDoctor a = new AddDoctor("Add a Doctor");
-							}
-							else if(s.next().equals("5"))
-							{
-								
-							}
+							/*displayReceptionistMenu();
+							Scanner s = new Scanner(System.in);*/
+							DoctorMenu m = new DoctorMenu("Menu");
 						}
-						}
-						else
+						else if(d.getAuthority(id) == 2)
 						{
-							displayPatientMenu();
+							/*displayPatientMenu();
 							Scanner s = new Scanner(System.in);
 							while(s.hasNext())
 							{
@@ -136,9 +122,13 @@ public class LoginScreen extends JFrame implements ActionListener
 								{
 									d.viewBill(id);
 								}
-							}
+							}*/
+							DoctorMenu m = new DoctorMenu("Menu");
 						}
-					}
+						else
+						{
+							
+						}
 				}
 			}
 			else if(e.getSource() == butReset)
