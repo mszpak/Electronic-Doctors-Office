@@ -14,7 +14,7 @@ public class patient {
     private String doctorID;
     private List<appointment> appointment;
     private bill bill;
-    static int appointmentNumber = 0;
+    private String medicalAttribute;
     
     public patient( String ID, String DOB, String name, String Password, List<appointment> appointment, List<medication> medication, bill bill)
     {
@@ -26,6 +26,15 @@ public class patient {
         this.doctorID = "";
         this.appointment = appointment;
         this.bill = bill;
+        medicalAttribute = "none";
+        
+    }
+    
+    public patient(String ID, String DOB, String name)
+    {
+    	PatientName = name;
+        DateOfBirth = DOB;
+        PatientID = ID;
     }
     
     /**
@@ -148,6 +157,17 @@ public class patient {
 			appointments = appointments + temp;
 		}
 		return appointments;
+	}
+	
+	public boolean setMedicalAttribute(String med)
+	{
+		medicalAttribute = med;
+		return true;
+	}
+	
+	public String getMedicalAttribute()
+	{
+		return medicalAttribute;
 	}
 	
 }

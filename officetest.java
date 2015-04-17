@@ -8,13 +8,6 @@ public class officetest {
 
 		
 		electronicDoctorsOffice d = new electronicDoctorsOffice();
-<<<<<<< HEAD
-		d.addPatient("p001", "910707", "soohan");
-		d.registerUser("soohan","13221322dla",1);
-		System.out.println(d.printPatientInfo("p001"));
-		//d.login("soohan", "13221322dla");
-		
-=======
 		//d.addPatient("p001", "910707", "soohan");
 		//d.scheduleAppointment("p001", "Feb 22", "13:21");
 		//d.assignMedication("p001", "tyrenol", "painkiller");
@@ -24,8 +17,10 @@ public class officetest {
 		//System.out.println(d.viewBill("p001"));
 		//d.login("soohan", "13221322dla");
 		//d.rescheduleAppointment("p001", "p001", , Time)
->>>>>>> 1b13945aa8bf39c1fc95d5fe11154beb33ff063b
-		
+		//d.addDoctor("d1010", "891010", "John", "Dentist", "Ames");
+		//d.scheduleAppointment("p001", "10:10", "Feb 21");
+		//d.editPatientNotes("p001", "p001Feb 21", "trukmakto");
+		//System.out.println(d.viewAppointmentNotes("p001"));
 		
 	}
 
