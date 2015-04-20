@@ -101,6 +101,51 @@ public class DatabaseSupport {
         return returnValue;
     }
     
+    public medication getMedication(String ID)
+    {
+        medication p=null;
+        try {
+            connection=this.getConnection();
+            
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from medication where name='"+ID+"'");
+            
+            
+            if(rs.next())
+            {
+                
+                if(ID.equals(rs.getString(2)))
+                {
+                    
+                    
+                    
+                    p = new medication(rs.getString(1), rs.getString(2), rs.getString(3));
+                }
+                else
+                {
+                    System.out.println("Wrong Name");
+                    p = null;
+                }
+            }
+            
+            stmt.close();
+            
+            connection.close(); } catch (SQLException sqle){
+                sqle.printStackTrace(); while (sqle != null) {
+                    String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+                    "Error code: "+sqle.getErrorCode() +
+                    "\n\t\t"+
+                    "SQLState: "+sqle.getSQLState()+"\n";
+                    System.out.println(logMessage);
+                    sqle = sqle.getNextException();
+                }
+                
+                
+            }
+        
+        return p;
+    }
+    
     public patient getPatientInfo(String ID)
     {
         patient p=null;

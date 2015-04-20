@@ -14,7 +14,8 @@ public class officetest {
 		//d.addDoctorToPatient("d1010", "p001");
 		//d.registerUser("soohan","13221322dla",1);
 		//d.editPatientBilling("p001", "3000");
-		//System.out.println(d.viewBill("p001"));
+		//d.payBill("p001");
+		System.out.println(d.viewBill("p001"));
 		//d.login("soohan", "13221322dla");
 		//d.rescheduleAppointment("p001", "p001", , Time)
 		//d.addDoctor("d1010", "891010", "John", "Dentist", "Ames");

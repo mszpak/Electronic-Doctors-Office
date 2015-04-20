@@ -177,7 +177,65 @@ public class electronicDoctorsOffice {
         return this.getDatabaseSupportInstance().writeMedication(m);
     }
     
-    private DatabaseSupport getDatabaseSupportInstance()
+    public boolean payBill(String ID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	bill b = new bill(p.getBill().getID(), "0");
+    	p.editBill(b);
+    	this.getDatabaseSupportInstance().putPatient(p);
+        return true;
+    }
+    
+    public patient searchPatient(String ID)
+    {
+    	return this.getDatabaseSupportInstance().getPatientInfo(ID);
+    }
+    
+    public medication searchMedication(String name)
+    {
+    	return this.getDatabaseSupportInstance().getMedication(name);
+    }
+    
+    public boolean deleteAppointment(String pID, String aID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	p.deleteAppointment(aID);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+
+    public boolean completeMedication(String ID, String name)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	p.deleteMedication(name);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+    
+    public List<patient> listDoctorsPatients(String ID)
+    {
+    	doctor d = this.getDatabaseSupportInstance().getDoctor(ID);
+    	return d.getPatients();
+    }
+    
+    public boolean deleteDoctorFromPatient(String dID, String pID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	p.deleteDoctor(dID);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+    
+    public boolean addPatientToDoctor(String dID, String pID)
+    {
+    	doctor d = this.getDatabaseSupportInstance().getDoctor(dID);
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	d.addPatient(p);
+    	this.getDatabaseSupportInstance().writeDoctor(d);
+    	return true;
+    }
+    
+    public DatabaseSupport getDatabaseSupportInstance()
     {
         if(ds==null)
         {

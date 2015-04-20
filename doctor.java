@@ -65,4 +65,10 @@ public class doctor{
     	return patients;
     }
     
+    public boolean addPatient(patient p)
+    {
+    	patients.add(p);
+    	return true;
+    }
+    
 }

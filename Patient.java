@@ -170,4 +170,33 @@ public class patient {
 		return medicalAttribute;
 	}
 	
+	public boolean deleteAppointment(String appID)
+	{
+		for(int i=0; i<appointment.size(); i++)
+		{
+			if(appointment.get(i).getID().equals(appID))
+			{
+				appointment.remove(i);
+			}
+		}
+		return true;
+	}
+	
+	public boolean deleteMedication(String name)
+	{
+		for(int i=0; i<medication.size(); i++)
+		{
+			if(medication.get(i).getName().equals(name))
+			{
+				appointment.remove(i);
+			}
+		}
+		return true;
+	}
+	
+	public boolean deleteDoctor(String dID)
+	{
+		doctorID = "none";
+		return true;
+	}
 }
