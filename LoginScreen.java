@@ -1,6 +1,7 @@
-package proj1;
+package Graphics;
 import javax.swing.*;
 
+import proj1.electronicDoctorsOffice;
 import Graphics.AddDoctor;
 import Graphics.AddPatient;
 import Graphics.DoctorMenu;

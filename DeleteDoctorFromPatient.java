@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,23 +14,23 @@ import javax.swing.JTextField;
 import proj1.electronicDoctorsOffice;
 import proj1.medication;
 
-public class AddMedicationToPatient extends JFrame implements ActionListener
+public class DeleteDoctorFromPatient extends JFrame implements ActionListener
 {
 		
 		private JButton AddToDatabase,butReset,butExit;
-		private JTextField medicineName;
+		private JTextField doctorID;
 		private JTextField patientID;
 		private JLabel lblName, lblID;
 		
-		public AddMedicationToPatient(String name)
+		public DeleteDoctorFromPatient(String name)
 		{
 			super(name);
-			AddToDatabase = new JButton("Add Medicine To Patient");
+			AddToDatabase = new JButton("Delete Doctor From Patient");
 			butReset = new JButton("Reset");
 			butExit = new JButton("Exit");
-			medicineName = new JTextField();
+			doctorID = new JTextField();
 			patientID = new JTextField();
-			lblName = new JLabel("Medicine Name");
+			lblName = new JLabel("Doctor ID");
 			lblID = new JLabel("Patient ID");
 			
 			this.setLayout(null);
@@ -41,18 +42,18 @@ public class AddMedicationToPatient extends JFrame implements ActionListener
 			
 			lblName.setBounds(10,10,120,20);
 			lblID.setBounds(10,30,120,20);
-			medicineName.setBounds(140,10,160,20);
-			patientID.setBounds(140,30,160,20);
+			patientID.setBounds(140,10,160,20);
+			doctorID.setBounds(140,30,160,20);
 
 			
-			AddToDatabase.setBounds(140, 80, 110, 20);
+			AddToDatabase.setBounds(70, 80, 180, 20);
 			butReset.setBounds(255, 80, 70, 20);
 			butExit.setBounds(330, 180, 70, 20);
 			
 			this.add(AddToDatabase);
 			this.add(butReset);
 			this.add(butExit);
-			this.add(medicineName);
+			this.add(doctorID);
 			this.add(patientID);
 			this.add(lblName);
 			this.add(lblID);
@@ -63,7 +64,7 @@ public class AddMedicationToPatient extends JFrame implements ActionListener
 
 		public static void main(String[] args)
 		{
-			AddMedication m = new AddMedication("Add Medication");
+			DeleteDoctorFromPatient d = new DeleteDoctorFromPatient("Delete a Doctor From a Patient");
 		}
 		
 		
@@ -81,33 +82,59 @@ public class AddMedicationToPatient extends JFrame implements ActionListener
 					f1.add(pan);
 					pan.add(lbl);
 				}
+				else if(doctorID.getText().equals(null) || doctorID.getText().equals(""))
+				{
+					JFrame f1 = new JFrame("enter ID");
+					f1.setSize(200,75);
+					f1.setVisible(true);
+					JLabel lbl = new JLabel("Doctor ID must be given");
+					JPanel pan = new JPanel();
+					f1.add(pan);
+					pan.add(lbl);
+				}
 				else
 				{
 					String patID = patientID.getText();
-					String medName = medicineName.getText();
+					String docID = doctorID.getText();
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
-					if(d.editPatientMedicalAttributes(patID, medName))
+					if(d.addPatientToDoctor(docID, patID))
 					{
-						JFrame f1 = new JFrame("Medicine Added");
+						JFrame f1 = new JFrame("Doctor Deleted");
 						f1.setSize(200,75);
 						f1.setVisible(true);
-						JLabel lbl = new JLabel("The medicine was added successfully");
+						JLabel lbl = new JLabel("The doctor was successfully removed");
 						JPanel pan = new JPanel();
 						f1.add(pan);
 						pan.add(lbl);
 					}
 					else
 					{
-						JFrame f1 = new JFrame("Medicine Not Added");
+						JFrame f1 = new JFrame("Doctor Not Added");
 						f1.setSize(200,75);
 						f1.setVisible(true);
-						JLabel lbl = new JLabel("The medicine was not added successfully");
+						JLabel lbl = new JLabel("The doctor was not successfully removed");
 						JPanel pan = new JPanel();
 						f1.add(pan);
 						pan.add(lbl);
 					}
 				}
 			}
+			else if(e.getSource() == butExit)
+			{
+				setVisible(false);
+				dispose();
+			}
+			else if(e.getSource() == butReset)
+			{
+				for(Component C : this.getContentPane().getComponents())
+				{
+					if(C instanceof JTextField){
+						
+						((JTextField) C).setText("");
+					}
+				}
+			}
 			
 		}
+		
 }

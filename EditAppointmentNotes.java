@@ -89,7 +89,7 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 					String appNotes = notes.getText();
 					String pID = patientID.getText();
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
-					if(d.editAppointmentNotes(pID, Integer.parseInt(appID), appNotes))
+					if(d.editPatientNotes(pID, appID, appNotes))
 					{
 						JFrame f1 = new JFrame("Appointment Notes Changed");
 						f1.setSize(200,75);
