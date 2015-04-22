@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +25,7 @@ public class ViewBill extends JFrame implements ActionListener{
 		lblPatientID = new JLabel("Patient ID");
 		patientID = new JTextField();
 		butViewBill = new JButton("View Bill");
-		butExit = new JButton("Exit");
+		butExit = new JButton("Back");
 		
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +66,11 @@ public class ViewBill extends JFrame implements ActionListener{
 			f1.add(pan);
 			pan.add(lbl);
 		}
-		
+		else if(e.getSource() == butExit)
+		{
+			setVisible(false);
+			dispose();
+		}
 	}
 
 }

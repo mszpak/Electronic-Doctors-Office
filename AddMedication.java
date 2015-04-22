@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,7 +27,7 @@ public class AddMedication extends JFrame implements ActionListener
 			super(name);
 			AddToDatabase = new JButton("Add Medicine");
 			butReset = new JButton("Reset");
-			butExit = new JButton("Exit");
+			butExit = new JButton("Back");
 			medicineName = new JTextField();
 			ID = new JTextField();
 			medType = new JTextField();
@@ -113,6 +114,21 @@ public class AddMedication extends JFrame implements ActionListener
 						f1.add(pan);
 						pan.add(lbl);
 					}
+				}
+			}
+			else if(e.getSource() == butExit)
+			{
+				setVisible(false);
+				dispose();
+			}
+			else if(e.getSource() == butReset)
+			{
+				for (Component C : this.getContentPane().getComponents())
+				{    
+				    if (C instanceof JTextField){
+
+				        ((JTextField) C).setText(""); //abstract superclass
+				    }
 				}
 			}
 			

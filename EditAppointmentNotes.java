@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
@@ -25,7 +26,7 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 			super(name);
 			AddToDatabase = new JButton("Edit Appointment");
 			butReset = new JButton("Reset");
-			butExit = new JButton("Exit");
+			butExit = new JButton("Back");
 			notes = new JTextField();
 			ID = new JTextField();
 			lblNotes = new JLabel("Appointment Notes");
@@ -89,7 +90,7 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 					String appNotes = notes.getText();
 					String pID = patientID.getText();
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
-					if(d.editAppointmentNotes(pID, Integer.parseInt(appID), appNotes))
+					if(d.editPatientNotes(pID, appID, appNotes))
 					{
 						JFrame f1 = new JFrame("Appointment Notes Changed");
 						f1.setSize(200,75);
@@ -109,6 +110,21 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 						f1.add(pan);
 						pan.add(lbl);
 					}
+				}
+			}
+			else if(e.getSource() == butExit)
+			{
+				setVisible(false);
+				dispose();
+			}
+			else if(e.getSource() == butReset)
+			{
+				for (Component C : this.getContentPane().getComponents())
+				{    
+				    if (C instanceof JTextField){
+
+				        ((JTextField) C).setText(""); //abstract superclass
+				    }
 				}
 			}
 			

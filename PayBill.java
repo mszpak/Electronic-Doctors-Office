@@ -12,35 +12,35 @@ import javax.swing.JTextField;
 
 import proj1.electronicDoctorsOffice;
 
-public class ViewAppointmentNotes extends JFrame implements ActionListener{
+public class PayBill extends JFrame implements ActionListener{
 
-	private JButton butViewApp,butExit;
+	private JButton butPayBill,butExit;
 	private JLabel lblPatientID;
 	private JTextField patientID;
 	
-	public ViewAppointmentNotes(String name)
+	public PayBill(String name)
 	{
 		super(name);
 		
 		lblPatientID = new JLabel("Patient ID");
 		patientID = new JTextField();
-		butViewApp = new JButton("View Appointment Notes");
+		butPayBill = new JButton("Pay Bill");
 		butExit = new JButton("Back");
 		
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		butExit.addActionListener(this);
-		butViewApp.addActionListener(this);
+		butPayBill.addActionListener(this);
 		
 		lblPatientID.setBounds(30, 40, 100, 20);
 		patientID.setBounds(110, 40, 100, 20);
-		butViewApp.setBounds(80, 70, 180, 20);
+		butPayBill.setBounds(110, 70, 120, 20);
 		butExit.setBounds(220, 120, 60, 20);
 		
 		this.add(lblPatientID);
 		this.add(patientID);
-		this.add(butViewApp);
+		this.add(butPayBill);
 		this.add(butExit);
 		
 		this.setSize(300,180);
@@ -48,30 +48,41 @@ public class ViewAppointmentNotes extends JFrame implements ActionListener{
 		
 	}
 	public static void main(String[] args) {
-		ViewAppointmentNotes v = new ViewAppointmentNotes("Get Appointment Info");
+		PayBill g = new PayBill("Pay Bill");
 
 	}
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == butViewApp)
+		if(e.getSource() == butPayBill)
 		{
 			String id = patientID.getText();
 			electronicDoctorsOffice d = new electronicDoctorsOffice();
-			String patientInfo = d.viewAppointmentNotes(id);
-			JFrame f1 = new JFrame("View Appointment Notes");
-			f1.setSize(300,200);
-			f1.setVisible(true);
-			JLabel lbl = new JLabel(patientInfo);
-			JPanel pan = new JPanel();
-			f1.add(pan);
-			pan.add(lbl);
+			if(d.payBill(id))
+			{
+				JFrame f1 = new JFrame("Pay Bill");
+				f1.setSize(200,75);
+				f1.setVisible(true);
+				JLabel lbl = new JLabel("Bill paid Successfully");
+				JPanel pan = new JPanel();
+				f1.add(pan);
+				pan.add(lbl);
+			}
+			else
+			{
+				JFrame f1 = new JFrame("Pay Bill");
+				f1.setSize(200,75);
+				f1.setVisible(true);
+				JLabel lbl = new JLabel("Bill was not paid Successfully");
+				JPanel pan = new JPanel();
+				f1.add(pan);
+				pan.add(lbl);
+			}
 		}
 		else if(e.getSource() == butExit)
 		{
 			setVisible(false);
 			dispose();
 		}
-		
 	}
 
 }

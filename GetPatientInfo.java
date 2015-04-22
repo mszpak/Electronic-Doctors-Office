@@ -24,7 +24,7 @@ public class GetPatientInfo extends JFrame implements ActionListener{
 		lblPatientID = new JLabel("Patient ID");
 		patientID = new JTextField();
 		butGetPatient = new JButton("Get Patient Info");
-		butExit = new JButton("Exit");
+		butExit = new JButton("Back");
 		
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

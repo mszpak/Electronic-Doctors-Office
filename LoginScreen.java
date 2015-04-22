@@ -1,10 +1,8 @@
-package proj1;
+package Graphics;
 import javax.swing.*;
 
-import Graphics.AddDoctor;
-import Graphics.AddPatient;
-import Graphics.DoctorMenu;
-import Graphics.RemovePatient;
+import proj1.electronicDoctorsOffice;
+
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
