@@ -14,7 +14,7 @@ public class patient {
     private String doctorID;
     private List<appointment> appointment;
     private bill bill;
-    static int appointmentNumber = 0;
+    private String medicalAttribute;
     
     public patient( String ID, String DOB, String name, String Password, List<appointment> appointment, List<medication> medication, bill bill)
     {
@@ -26,6 +26,15 @@ public class patient {
         this.doctorID = "";
         this.appointment = appointment;
         this.bill = bill;
+        medicalAttribute = "none";
+        
+    }
+    
+    public patient(String ID, String DOB, String name)
+    {
+    	PatientName = name;
+        DateOfBirth = DOB;
+        PatientID = ID;
     }
     
     /**
@@ -150,4 +159,44 @@ public class patient {
 		return appointments;
 	}
 	
+	public boolean setMedicalAttribute(String med)
+	{
+		medicalAttribute = med;
+		return true;
+	}
+	
+	public String getMedicalAttribute()
+	{
+		return medicalAttribute;
+	}
+	
+	public boolean deleteAppointment(String appID)
+	{
+		for(int i=0; i<appointment.size(); i++)
+		{
+			if(appointment.get(i).getID().equals(appID))
+			{
+				appointment.remove(i);
+			}
+		}
+		return true;
+	}
+	
+	public boolean deleteMedication(String name)
+	{
+		for(int i=0; i<medication.size(); i++)
+		{
+			if(medication.get(i).getName().equals(name))
+			{
+				appointment.remove(i);
+			}
+		}
+		return true;
+	}
+	
+	public boolean deleteDoctor(String dID)
+	{
+		doctorID = "none";
+		return true;
+	}
 }

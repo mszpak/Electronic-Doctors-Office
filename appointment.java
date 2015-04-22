@@ -6,18 +6,16 @@ public class appointment{
     private String ID;
     private String notes;
     private int price;
-    private int apptNumber;
-
+    private String appID;
     
-    public appointment(String ID, String date, String TOD, String notes){
+    public appointment(String ID, String date, String TOD, String notes, String appID){
         
         time = TOD;
         this.date = date;
         this.ID = ID;
         this.notes = notes;
         this.price = 100;
-        this.apptNumber = patient.appointmentNumber;
-        patient.appointmentNumber++;
+        this.appID = appID;
     }
     
     public String getAppointment(){
@@ -56,9 +54,9 @@ public class appointment{
     	return notes;
     }
     
-    public boolean setNotes(String n)
+    public boolean editNote(String note)
     {
-    	notes = n;
+    	notes = note;
     	return true;
     }
     
@@ -68,8 +66,8 @@ public class appointment{
     	return price;
     }
     
-    public int getApptNumber()
+    public String getappID()
     {
-    	return apptNumber;
+    	return this.appID;
     }
 }

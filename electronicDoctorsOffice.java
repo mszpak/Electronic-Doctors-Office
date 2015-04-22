@@ -1,5 +1,6 @@
 package proj1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class electronicDoctorsOffice {
@@ -42,7 +43,7 @@ public class electronicDoctorsOffice {
     public boolean scheduleAppointment(String ID, String time, String date)
     {
         patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
-        p.addAppointment(new appointment(ID, time, date, ""));
+        p.addAppointment(new appointment(ID, time, date, "", ID+date));
         this.getDatabaseSupportInstance().putPatient(p);
         return true;
     }
@@ -83,16 +84,18 @@ public class electronicDoctorsOffice {
     	int exists = 0;
     	for(int i=0; i<a.size(); i++)
     	{
-    		if(a.get(i).getID().equals(aID))
+    		if(a.get(i).getappID().equals(aID))
     		{
     			a.get(i).setDate(Date);
     			a.get(i).setTime(Time);
     			exists = 1;
     		}
+
+    	
     	}
     	if(exists == 0)
     	{
-    		a.add(new appointment(aID, Date, Time, ""));
+    		a.add(new appointment(ID, Date, Time, "", aID));
 
     	}
     	p.replaceAppointmentList(a);
@@ -114,6 +117,7 @@ public class electronicDoctorsOffice {
     public String viewAppointmentNotes(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	
     	return p.viewApptNotes();
     }
     
@@ -121,6 +125,7 @@ public class electronicDoctorsOffice {
     public String viewAppointmentHistory(String patientID)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
+    	
     	return p.viewApptHistory();
     }
     
@@ -138,25 +143,31 @@ public class electronicDoctorsOffice {
     	return calculated + "$" + billTotal;
     }
     
-    public boolean editPatientMedicalAttributes(String patientID, medication med)
+    //do this
+    public boolean editPatientMedicalAttributes(String patientID, String medicalAttributes)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
-    	p.addMedication(med);
+    	p.setMedicalAttribute(medicalAttributes);
+    
     	this.getDatabaseSupportInstance().putPatient(p);
-        return true;	
+        return true;
+    	
     }
     
-    public boolean editAppointmentNotes(String patientID, int appointmentNum, String notes)
+    //do this
+    public boolean editPatientNotes(String patientID, String aID ,String notes)
     {
     	patient p = this.getDatabaseSupportInstance().getPatientInfo(patientID);
     	List<appointment> a = p.getAppointment();
-    	for(int i = 0; i < a.size(); i++)
+    	for(int i=0; i<a.size(); i++)
     	{
-    		if(a.get(i).getApptNumber() == appointmentNum)
+    		if(a.get(i).getappID().equals(aID))
     		{
-    			a.get(i).setNotes(notes);
+    			a.get(i).editNote(notes);
     		}
     	}
+    	p.replaceAppointmentList(a);
+    	this.getDatabaseSupportInstance().putPatient(p);
     	return true;
     }
     
@@ -166,7 +177,65 @@ public class electronicDoctorsOffice {
         return this.getDatabaseSupportInstance().writeMedication(m);
     }
     
-    private DatabaseSupport getDatabaseSupportInstance()
+    public boolean payBill(String ID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	bill b = new bill(p.getBill().getID(), "0");
+    	p.editBill(b);
+    	this.getDatabaseSupportInstance().putPatient(p);
+        return true;
+    }
+    
+    public patient searchPatient(String ID)
+    {
+    	return this.getDatabaseSupportInstance().getPatientInfo(ID);
+    }
+    
+    public medication searchMedication(String name)
+    {
+    	return this.getDatabaseSupportInstance().getMedication(name);
+    }
+    
+    public boolean deleteAppointment(String pID, String aID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	p.deleteAppointment(aID);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+
+    public boolean completeMedication(String ID, String name)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(ID);
+    	p.deleteMedication(name);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+    
+    public List<patient> listDoctorsPatients(String ID)
+    {
+    	doctor d = this.getDatabaseSupportInstance().getDoctor(ID);
+    	return d.getPatients();
+    }
+    
+    public boolean deleteDoctorFromPatient(String dID, String pID)
+    {
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	p.deleteDoctor(dID);
+    	this.getDatabaseSupportInstance().putPatient(p);
+    	return true;
+    }
+    
+    public boolean addPatientToDoctor(String dID, String pID)
+    {
+    	doctor d = this.getDatabaseSupportInstance().getDoctor(dID);
+    	patient p = this.getDatabaseSupportInstance().getPatientInfo(pID);
+    	d.addPatient(p);
+    	this.getDatabaseSupportInstance().writeDoctor(d);
+    	return true;
+    }
+    
+    public DatabaseSupport getDatabaseSupportInstance()
     {
         if(ds==null)
         {

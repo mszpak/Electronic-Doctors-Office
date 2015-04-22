@@ -1,5 +1,6 @@
 package proj1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class doctor{
@@ -62,6 +63,12 @@ public class doctor{
     		patients = patients + temp + '\n';
     	}
     	return patients;
+    }
+    
+    public boolean addPatient(patient p)
+    {
+    	patients.add(p);
+    	return true;
     }
     
 }

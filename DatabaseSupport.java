@@ -101,6 +101,51 @@ public class DatabaseSupport {
         return returnValue;
     }
     
+    public medication getMedication(String ID)
+    {
+        medication p=null;
+        try {
+            connection=this.getConnection();
+            
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from medication where name='"+ID+"'");
+            
+            
+            if(rs.next())
+            {
+                
+                if(ID.equals(rs.getString(2)))
+                {
+                    
+                    
+                    
+                    p = new medication(rs.getString(1), rs.getString(2), rs.getString(3));
+                }
+                else
+                {
+                    System.out.println("Wrong Name");
+                    p = null;
+                }
+            }
+            
+            stmt.close();
+            
+            connection.close(); } catch (SQLException sqle){
+                sqle.printStackTrace(); while (sqle != null) {
+                    String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+                    "Error code: "+sqle.getErrorCode() +
+                    "\n\t\t"+
+                    "SQLState: "+sqle.getSQLState()+"\n";
+                    System.out.println(logMessage);
+                    sqle = sqle.getNextException();
+                }
+                
+                
+            }
+        
+        return p;
+    }
+    
     public patient getPatientInfo(String ID)
     {
         patient p=null;
@@ -136,7 +181,7 @@ public class DatabaseSupport {
                 {
                     while(rsAppoint.next())
                     {
-                        a.add(new appointment(rsAppoint.getString(1),rsAppoint.getString(2),rsAppoint.getString(3),rsAppoint.getString(4)));
+                        a.add(new appointment(rsAppoint.getString(1),rsAppoint.getString(2),rsAppoint.getString(3),rsAppoint.getString(4),rsAppoint.getString(5)));
                     }
                     
                     while(rsMed.next())
@@ -175,6 +220,64 @@ public class DatabaseSupport {
         return p;
     }
     
+    
+    public doctor getDoctor(String ID)
+    {
+        doctor p=null;
+        try {
+            connection=this.getConnection();
+            
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from doctor where ID='"+ID+"'");
+            
+            Statement stmtPatient = connection.createStatement();
+            
+            if(rs.next())
+            {
+                ResultSet rsPatient = stmtPatient.executeQuery("select * from patient where DoctorID = '"+ID+"' order by ID");
+                
+                List<patient> a = new ArrayList<patient>();
+                
+                
+                if(ID.equals(rs.getString(1)))
+                {
+                    while(rsPatient.next())
+                    {
+                        a.add(new patient(rsPatient.getString(1),rsPatient.getString(2),rsPatient.getString(3)));
+                    }
+                    
+                    
+                    p = new doctor(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), a);
+                }
+                else
+                {
+                    System.out.println("Wrong ID");
+                    p = null;
+                }
+            }
+            
+            stmt.close();
+            stmtPatient.close();
+            
+            connection.close(); } catch (SQLException sqle){
+                sqle.printStackTrace(); while (sqle != null) {
+                    String logMessage = "\n SQL Error: "+ sqle.getMessage() + "\n\t\t"+
+                    "Error code: "+sqle.getErrorCode() +
+                    "\n\t\t"+
+                    "SQLState: "+sqle.getSQLState()+"\n";
+                    System.out.println(logMessage);
+                    sqle = sqle.getNextException();
+                }
+                
+                
+            }
+        
+        return p;
+    }
+    
+    
+    
+    
     public boolean putPatient(patient p)
     {
         try {
@@ -195,11 +298,6 @@ public class DatabaseSupport {
             	stmtAppreset.executeUpdate("delete from appointment where ID='"+p.getID()+"'");
                 for(int i=0; i<p.getAppointment().size(); i++)
                 {
-
-          
-                    qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+")";
-                    stmtAppoint.executeUpdate(qs);
-
                 	boolean exists = false;
                 	for(int j=i+1; j<p.getAppointment().size(); j++)
                 	{
@@ -210,11 +308,10 @@ public class DatabaseSupport {
                 	}
                 	if(!exists)
                 	{
-                		qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+","+"'"+p.getAppointment().get(i).getNotes()+"'"+")";
+                		qs = "insert into appointment values ('"+p.getAppointment().get(i).getID()+"',"+"'"+p.getAppointment().get(i).getDate() +"'"+","+"'"+p.getAppointment().get(i).getTime()+"'"+","+"'"+p.getAppointment().get(i).getNotes()+"'"+","+"'"+p.getAppointment().get(i).getappID()+"'"+")";
                         stmtAppoint.executeUpdate(qs);
                 	}
                 	
-
                     
                 }
             }
