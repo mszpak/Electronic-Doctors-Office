@@ -15,6 +15,7 @@ public class patient {
     private List<appointment> appointment;
     private bill bill;
     private String medicalAttribute;
+    static int appointmentNumber = 0;
     
     public patient( String ID, String DOB, String name, String Password, List<appointment> appointment, List<medication> medication, bill bill)
     {
@@ -27,14 +28,13 @@ public class patient {
         this.appointment = appointment;
         this.bill = bill;
         medicalAttribute = "none";
-        
     }
     
     public patient(String ID, String DOB, String name)
     {
     	PatientName = name;
-        DateOfBirth = DOB;
-        PatientID = ID;
+    	DateOfBirth = DOB;
+    	PatientID = ID;
     }
     
     /**
@@ -116,7 +116,7 @@ public class patient {
     
     public String printInfo()
     {
-    	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth+", Doctor: "+doctorID;
+    	return "ID: "+PatientID+", Name: "+PatientName+", Date of birth: "+DateOfBirth;
     }
     
     public String getDoctorID()

@@ -2,7 +2,14 @@ package Graphics;
 import javax.swing.*;
 
 import proj1.electronicDoctorsOffice;
+<<<<<<< HEAD
 
+=======
+import Graphics.AddDoctor;
+import Graphics.AddPatient;
+import Graphics.DoctorMenu;
+import Graphics.RemovePatient;
+>>>>>>> 400306829e46788aa50ae1dd0e125e4449a75251
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
