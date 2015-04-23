@@ -186,6 +186,11 @@ public class electronicDoctorsOffice {
         return true;
     }
     
+    public doctor searchDoctor(String ID)
+    {
+    	return this.getDatabaseSupportInstance().getDoctor(ID);
+    }
+    
     public patient searchPatient(String ID)
     {
     	return this.getDatabaseSupportInstance().getPatientInfo(ID);
