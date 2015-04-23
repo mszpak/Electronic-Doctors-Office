@@ -22,7 +22,8 @@ public class DoctorMenu extends JFrame implements ActionListener
 		
 		private JButton butAddDoctor,butAddMedication,butAddPatient,butRemovePatient,
 		butGetPatientInfo,butEditBill,butViewBill,butViewAppList,butViewAppNotes,butSchedApp,
-		butAddMedToP,butEditApp,butAddDocToP,butExit;
+		butAddMedToP,butEditApp,butAddDocToP,butListDoctorPatient,butPayBill,butSearchP,butSearchM,butCompleteM,
+		butAddPtoDoc,butDeleteDoc,butExit;
 		
 		ArrayList<JButton> butList = new ArrayList<JButton>();		
 		public DoctorMenu(String name)
@@ -42,6 +43,13 @@ public class DoctorMenu extends JFrame implements ActionListener
 			butAddMedToP = new JButton("Add Medication to Patient");
 			butEditApp = new JButton("Edit Appointment Notes");
 			butAddDocToP = new JButton("Add Doctor to Patient");
+			butListDoctorPatient = new JButton("Get Doctors Patients");
+			butPayBill = new JButton("Pay Bill");
+			butSearchP = new JButton("Search Patient");
+			butSearchM = new JButton("Search Medication");
+			butCompleteM = new JButton("Complete Medication");
+			butAddPtoDoc = new JButton("Add Patient to Doctor");
+			butDeleteDoc = new JButton("Delete Doc from Patient");
 			butExit = new JButton("Exit");
 			
 			butList.add(butAddDoctor);
@@ -57,6 +65,13 @@ public class DoctorMenu extends JFrame implements ActionListener
 			butList.add(butAddMedToP);
 			butList.add(butEditApp);
 			butList.add(butAddDocToP);
+			butList.add(butListDoctorPatient);
+			butList.add(butPayBill);
+			butList.add(butSearchP);
+			butList.add(butSearchM);
+			butList.add(butCompleteM);
+			butList.add(butAddPtoDoc);
+			butList.add(butDeleteDoc);
 			butList.add(butExit);
 			
 			this.setLayout(null);
@@ -80,14 +95,21 @@ public class DoctorMenu extends JFrame implements ActionListener
 			butAddMedToP.setBounds(x, 10*h, w, h);
 			butEditApp.setBounds(x, 11*h, w, h);
 			butAddDocToP.setBounds(x, 12*h, w, h);
-			butExit.setBounds(x, 13*h, w, h);
+			butListDoctorPatient.setBounds(x, 13*h, w, h);
+			butPayBill.setBounds(x, 14*h, w, h);
+			butSearchP.setBounds(x, 15*h, w, h);
+			butSearchM.setBounds(x, 16*h, w, h);
+			butCompleteM.setBounds(x, 17*h, w, h);
+			butAddPtoDoc.setBounds(x, 18*h, w, h);
+			butDeleteDoc.setBounds(x, 19*h, w, h);
+			butExit.setBounds(x, 20*h, w, h);
 			
 			for(JButton b: butList)
 			{
 				this.add(b);
 			}
 			
-			this.setSize(450,17*h);
+			this.setSize(450,24*h);
 			this.setVisible(true);
 		}
 
