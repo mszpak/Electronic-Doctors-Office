@@ -121,7 +121,7 @@ public class LoginScreen extends JFrame implements ActionListener
 									d.viewBill(id);
 								}
 							}*/
-							DoctorMenu m = new DoctorMenu("Menu");
+							PatientMenu m = new PatientMenu("Menu");
 						}
 						else
 						{
