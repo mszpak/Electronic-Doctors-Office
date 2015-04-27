@@ -43,6 +43,7 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 			
 			lblID.setBounds(10,30,120,20);
 			ID.setBounds(140,30,160,20);
+			patientID.setBounds(140,50,160,20);
 			lblPatientID.setBounds(10, 50, 120, 20);
 			lblNotes.setBounds(10, 70, 120, 20);
 			notes.setBounds(140,70,170,90);
@@ -59,6 +60,8 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 			this.add(ID);
 			this.add(lblNotes);
 			this.add(lblID);
+			this.add(patientID);
+			this.add(lblPatientID);
 			
 			this.setSize(450,250);
 			this.setVisible(true);
@@ -89,6 +92,26 @@ public class EditAppointmentNotes extends JFrame implements ActionListener
 					String appID = ID.getText();
 					String appNotes = notes.getText();
 					String pID = patientID.getText();
+					if(patientID.getText().equals(""))
+					{
+						JFrame f1 = new JFrame("enter ID");
+						f1.setSize(200,75);
+						f1.setVisible(true);
+						JLabel lbl = new JLabel("Must enter patient ID");
+						JPanel pan = new JPanel();
+						f1.add(pan);
+						pan.add(lbl);
+					}
+					if(ID.getText().equals(""))
+					{
+						JFrame f1 = new JFrame("enter ID");
+						f1.setSize(200,75);
+						f1.setVisible(true);
+						JLabel lbl = new JLabel("Must enter appointment ID");
+						JPanel pan = new JPanel();
+						f1.add(pan);
+						pan.add(lbl);
+					}
 					electronicDoctorsOffice d = new electronicDoctorsOffice();
 					if(d.editPatientNotes(pID, appID, appNotes))
 					{
