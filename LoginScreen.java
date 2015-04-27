@@ -3,10 +3,6 @@ import javax.swing.*;
 
 import proj1.electronicDoctorsOffice;
 
-import Graphics.AddDoctor;
-import Graphics.AddPatient;
-import Graphics.DoctorMenu;
-import Graphics.RemovePatient;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
