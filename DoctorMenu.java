@@ -173,6 +173,34 @@ public class DoctorMenu extends JFrame implements ActionListener
 			{
 				AddDoctorToPatient p = new AddDoctorToPatient("Add a Doctor to a Patient");
 			}
+			else if(e.getSource() == butListDoctorPatient)
+			{
+				ListDoctorsPatients l = new ListDoctorsPatients("List a Doctor's patients");
+			}
+			else if(e.getSource() == butPayBill)
+			{
+				PayBill m = new PayBill("Pay Bill");
+			}
+			else if(e.getSource() == butSearchP)
+			{
+				SearchPatient l = new SearchPatient("Get a Patient");
+			}
+			else if(e.getSource() == butSearchM)
+			{
+				SearchMedication s = new SearchMedication("Get a Medication");
+			}
+			else if(e.getSource() == butCompleteM)
+			{
+				CompleteMedication s = new CompleteMedication("Complete a Medication");
+			}
+			else if(e.getSource() == butAddPtoDoc)
+			{
+				AddPatientToDoctor s = new AddPatientToDoctor("Add a patient to a doctor");
+			}
+			else if(e.getSource() == butDeleteDoc)
+			{
+				DeleteDoctorFromPatient s = new DeleteDoctorFromPatient("Delete a Doctor from Patient");
+			}
 			else if(e.getSource() == butExit)
 			{
 				
